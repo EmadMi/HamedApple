@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1000
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HamedApple.DAL", "HamedApple.DAL\HamedApple.DAL.csproj", "{2802B32C-0BAE-4280-9CD9-DA6B7CDF85D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HamedApple.Business", "HamedApple.Business\HamedApple.Business.csproj", "{EACA70B8-B161-4046-AFAC-D8DCADA14317}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2802B32C-0BAE-4280-9CD9-DA6B7CDF85D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2802B32C-0BAE-4280-9CD9-DA6B7CDF85D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2802B32C-0BAE-4280-9CD9-DA6B7CDF85D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2802B32C-0BAE-4280-9CD9-DA6B7CDF85D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EACA70B8-B161-4046-AFAC-D8DCADA14317}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EACA70B8-B161-4046-AFAC-D8DCADA14317}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EACA70B8-B161-4046-AFAC-D8DCADA14317}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EACA70B8-B161-4046-AFAC-D8DCADA14317}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0D012A64-D8FF-4810-B9D5-86179C7395F7}
+	EndGlobalSection
+EndGlobal
