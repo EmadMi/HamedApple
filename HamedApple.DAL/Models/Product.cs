@@ -10,7 +10,7 @@ namespace HamedApple.DAL
     {
         [Key]
         public int Id { get; set; }
-        public int? TypeId { get; set; }
+        public int TypeId { get; set; }
         public virtual Refrence Type { get; set; }
         [Required]
         public string Title { get; set; }

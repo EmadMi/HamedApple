@@ -49,5 +49,10 @@
       <Name>HamedApple.DAL</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
+    <Folder Include="Services\" />
+    <Folder Include="ViewModels\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

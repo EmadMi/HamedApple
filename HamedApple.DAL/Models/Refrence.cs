@@ -22,5 +22,8 @@ namespace HamedApple.DAL
         public int OrderValue { get; set; }
         public bool IsActive { get; set; }
 
+        public virtual ICollection<Product> Products { get; set; }
+        public virtual ICollection<ProductDetails> ProductDetails { get; set; }
+
     }
 }

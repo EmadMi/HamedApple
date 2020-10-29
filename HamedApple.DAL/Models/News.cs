@@ -17,7 +17,7 @@ namespace HamedApple.DAL
         [Required]
         public string ImageName { get; set; }
         [Required]
-        public int Order { get; set; }
-        public bool Active { get; set; }
+        public int OrderValue { get; set; }
+        public bool IsActive { get; set; }
     }
 }

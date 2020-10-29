@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HamedApple.DAL", "HamedAppl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HamedApple.Business", "HamedApple.Business\HamedApple.Business.csproj", "{EACA70B8-B161-4046-AFAC-D8DCADA14317}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HamedApple.Web", "HamedApple.Web\HamedApple.Web.csproj", "{745DEBB8-6319-4A23-B281-3B430CF97464}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{EACA70B8-B161-4046-AFAC-D8DCADA14317}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EACA70B8-B161-4046-AFAC-D8DCADA14317}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EACA70B8-B161-4046-AFAC-D8DCADA14317}.Release|Any CPU.Build.0 = Release|Any CPU
+		{745DEBB8-6319-4A23-B281-3B430CF97464}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{745DEBB8-6319-4A23-B281-3B430CF97464}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{745DEBB8-6319-4A23-B281-3B430CF97464}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{745DEBB8-6319-4A23-B281-3B430CF97464}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
