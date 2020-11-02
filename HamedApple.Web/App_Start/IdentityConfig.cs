@@ -13,6 +13,7 @@ using Microsoft.Owin.Security;
 using HamedApple.Web.Models;
 using HamedApple.DAL;
 using HamedApple.DAL.Context;
+using HamedApple.DAL.Models;
 
 namespace HamedApple.Web
 {

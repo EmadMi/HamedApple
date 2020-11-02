@@ -1,0 +1,41 @@
+﻿.trimOverlyContainer {
+    background-color: rgba(0, 0, 0, 0.40);
+    min-height: 100vh;
+    height: 100%;
+}
+
+.bluredImage1 {
+    background-image: url(../Images/blured01.JPG);
+}
+
+.bluredImage2 {
+    background-image: url(../Images/blured02.JPG);
+}
+
+.bluredImage3 {
+    background-image: url(../Images/blured03.JPG);
+}
+
+.bluredImage4 {
+    background-image: url(../Images/blured04.JPG);
+}
+.navbar-brand-image {
+    background-image: url(../Images/favicon.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 40px;
+    height: 40px;
+}
+.bluredCover {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100vh;
+    height: 100%;
+    align-items: baseline;
+    background-origin: border-box;
+    background-attachment: fixed;
+}
+.CardBackGroundOpacity{
+    background-color:rgba(255, 255, 255, 0.80);
+}

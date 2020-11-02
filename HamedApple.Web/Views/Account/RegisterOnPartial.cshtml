@@ -1,0 +1,81 @@
+﻿@model HamedApple.Business.ViewModels.RegisterAndOrderVM
+@{ 
+    ViewBag.Title = "ثبت نام";
+    Layout = "";
+}
+
+
+<form id="RegisterForm" class="form-horizontal text-right" role="form">
+    @Html.AntiForgeryToken()
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-3 text-center">
+                <img src="~/Content/Images/Product.png" class="img-fluid rounded w-100" />
+            </div>
+            <div class="col-9">
+                <div class="row">
+                    <div class="col-12 py-1">
+                        <span class="text-muted VazirLight">محصول انتخابی شما : </span>
+                        @(Model.Product != null ? Model.Product.Type.Title : "") -
+                        @(Model.Product != null ? Model.Product.Title : "")
+                    </div>
+                    <div class="col-12 py-1">
+                        <span class="text-muted VazirLight ml-2">مبلغ کل : </span>
+                        <span id="PriceAll">@Convert.ToInt32(Model.OrderPrice).ToString("N0") تومان</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="form-group">
+        @Html.LabelFor(m => m.FullName, new { @class = "col-md-12 control-label text-muted VazirLight" })
+        <div class="col-md-12">
+            @Html.TextBoxFor(m => m.FullName, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.NationCode, new { @class = "col-md-12 control-label text-muted VazirLight" })
+        <div class="col-md-12">
+            @Html.TextBoxFor(m => m.NationCode, new { @class = "form-control text-left", @dir = "ltr", type = "number", pattern = "[0-9]*", inputmode = "numeric" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.MobileNumber, new { @class = "col-md-12 control-label text-muted VazirLight" })
+        <div class="col-md-12">
+            @Html.TextBoxFor(m => m.MobileNumber, new { @class = "form-control text-left", placeholder = "09*********", @dir = "ltr", type = "number", pattern = "[0-9]*", inputmode = "numeric" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Email, new { @class = "col-md-12 control-label text-muted VazirLight" })
+        <div class="col-md-12">
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control text-left", placeholder = "info@mail.com", @dir = "ltr" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Password, new { @class = "col-md-12 control-label text-muted VazirLight" })
+        <div class="col-md-12">
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-12 control-label text-muted VazirLight" })
+        <div class="col-md-12">
+            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="col-12 py-2">
+        <div class="text-danger small" id="RegisterMisCompeletes">
+            @Html.ValidationSummary("", new { @class = "text-danger small" })
+
+        </div>
+    </div>
+    <div class="col-12 py-2">
+        <input type="submit" class="btn btn-success w-100" value="ثبت نام" />
+    </div>
+    <div class="col-12 py-1 text-center">
+        <p class="text-muted small">من قبلا ثبت نام کردم</p>
+        @Html.ActionLink("ورود", "Login", "Account", routeValues: null, htmlAttributes: new { @class = "btn btn-primary w-100" })
+    </div>
+</form>
+           

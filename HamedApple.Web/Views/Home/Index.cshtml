@@ -1,31 +1,97 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@model HamedApple.Business.ViewModels.IndexVM
+@{
+    ViewBag.Title = "صفحه اصلی";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+@if (Model.NewsList.Any())
+{
+    <div id="NewsCarousel" class="carousel slide rounded-lg mb-3" data-ride="carousel">
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+        <!-- Indicators -->
+        <ul class="carousel-indicators">
+            @{
+                int Counter = 0;
+                foreach (var item in Model.NewsList)
+                {
+                    Counter++;
+                    <li data-target="#NewsCarousel" data-slide-to="@(Counter - 1)" class="@(Counter == 1 ? "active" : string.Empty)"></li>
+                }
+            }
+            @*<li data-target="#NewsCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#NewsCarousel" data-slide-to="1"></li>
+            <li data-target="#NewsCarousel" data-slide-to="2"></li>*@
+        </ul>
+        <div class="carousel-inner rounded-lg bg-dark">
+            @{
+                Counter = 0;
+                foreach (var item in Model.NewsList)
+                {
+                    Counter++;
+                    <div class="carousel-item rounded-lg text-center @(Counter == 1 ? "active" : string.Empty)">
+                        <img src="~/Content/Gallery/News/@(item.ImageName)" alt="@(item.Caption)" class="img-fluid">
+                        <div class="carousel-caption text-dark rounded-lg" style="background-color:rgba(255, 255, 255, 0.60)">
+                            <h3 class="font-weight-bold">@(item.Caption)</h3>
+                            <p>@(item.SmallDesc)</p>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+        <!-- Left and right controls -->
+        <a class="carousel-control-prev" href="#NewsCarousel" data-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </a>
+        <a class="carousel-control-next" href="#NewsCarousel" data-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </a>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+}
+
+    <div class="row">
+        @{
+            foreach (var item in Model.ProductList)
+            {
+                <div class="col-12 col-md-5 mx-auto text-center my-5">
+                    <div class="card shadow CardBackGroundOpacity rounded-lg">
+                        <div class="card-header bg-info text-white"><span class="VazirBold h4">@(item.Title)</span></div>
+                        <div class="card-body text-right">
+                            @{
+                                foreach (var itemDetail in item.ProductDetails)
+                                {
+                                    <div class="row w-100 mt-2 py-2 bg-light text-center mx-auto rounded-top border-top border-left border-right">
+                                        <div class="col-12">
+                                            <span class="font-weight-bolder">@(itemDetail.Refrence.Title)</span>
+                                        </div>
+                                    </div>
+                                    foreach (var itemDetailAnswers in itemDetail.ProductDetailAnswers)
+                                    {
+                                        <div class="row w-100 py-2 mx-auto border-left border-right @(itemDetailAnswers.Id == itemDetail.ProductDetailAnswers.Last().Id ? "border-bottom rounded-bottom":"")">
+                                            <div class="col-2 px-2 border-left text-center">
+                                                <span class="fas fa-check-double text-muted small"></span>
+                                            </div>
+                                            <div class="col-10 px-2 pr-3">
+                                                <span class="small VazirBold text-muted">@((itemDetail.Refrence.Name.Contains("#") ? Convert.ToInt32(itemDetailAnswers.AnswerValue).ToString("N0") + " تومان" : itemDetailAnswers.AnswerValue))</span>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                            }
+                        </div>
+                        <div class="card-footer">
+                            @{
+                                if (Request.IsAuthenticated)
+                                {
+
+                                }
+                                else
+                                {
+                                    <a class="btn btn-info w-100" data-target="#RegisterModal" data-toggle="modal" onclick="RegisterBegin('@item.Id')"><span class="text-white VazirBold">ثبت سفارش</span></a>
+                                }
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            }
+        }
     </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>

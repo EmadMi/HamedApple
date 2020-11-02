@@ -1,0 +1,13 @@
+﻿@model HamedApple.Business.ViewModels.LayoutVM
+
+<ul class="navbar-nav text-right">
+    @{
+        foreach (var item in Model.NavbarItems)
+        {
+            <li class="nav-item">
+                <a href="@(item.Name)" class="nav-link text-dark"><span class="text-dark">@(item.Title)</span></a>
+            </li>
+        }
+    }
+    @Html.Partial("_LoginPartial")
+</ul>

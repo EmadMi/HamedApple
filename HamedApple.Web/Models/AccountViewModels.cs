@@ -66,18 +66,18 @@ namespace HamedApple.Web.Models
     {
         [Required]
         [EmailAddress]
-        [Display(Name = "Email")]
+        [Display(Name = "پست الکترونیک")]
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "{0} باید حداقل {2} کاراکتر باشد.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "رمزعبور")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(Name = "تایید رمزعبور")]
+        [Compare("Password", ErrorMessage = "رمز عبور و تایید رمز عبور باید یکسان باشند.")]
         public string ConfirmPassword { get; set; }
     }
 

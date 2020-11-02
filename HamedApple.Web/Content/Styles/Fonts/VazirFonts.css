@@ -1,0 +1,45 @@
+﻿@font-face {
+    font-family: Vazir;
+    src: url('Vazir/Vazir.eot');
+    src: url('Vazir/Vazir.eot?#iefix') format('FontName-opentype'), url('Vazir/Vazir.woff') format('woff'), url('Vazir/Vazir.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: VazirThin;
+    src: url('Vazir/Vazir-Thin.eot');
+    src: url('Vazir/Vazir-Thin.eot') format('FontName-opentype'), url('Vazir/Vazir-Thin.woff') format('woff'), url('Vazir/Vazir-Thin.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: VazirLight;
+    src: url('Vazir/Vazir-Light.eot');
+    src: url('Vazir/Vazir-Light.eot?#iefix') format('FontName-opentype'), url('Vazir/Vazir-Light.woff') format('woff'), url('Vazir/Vazir-Light.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: VazirBold;
+    src: url('Vazir/Vazir-Bold.eot');
+    src: url('Vazir/Vazir-Bold.eot?#iefix') format('FontName-opentype'), url('Vazir/Vazir-Bold.woff') format('woff'), url('Vazir/Vazir-Bold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body{
+    font-family:Vazir;
+    font-weight:700;
+}
+.VazirBold{
+    font-family:VazirBold;
+    font-weight:900;
+}
+.VazirThin{
+    font-family:VazirThin;
+    font-weight:300;
+}
+.VazirLight{
+    font-family:VazirLight;
+    font-weight:500;
+}

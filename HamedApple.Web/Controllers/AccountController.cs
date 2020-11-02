@@ -9,25 +9,39 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using HamedApple.Web.Models;
+using System.Web.Routing;
+using System.Collections.Generic;
+using HamedApple.Business.ViewModels;
+using HamedApple.Business.Interfaces;
+using Unity;
+using HamedApple.DAL.Models;
+using Parbad;
+using Parbad.Mvc;
 
 namespace HamedApple.Web.Controllers
 {
     [Authorize]
+    
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-
-        public AccountController()
+        IClientService _ClientService;
+        private readonly IOnlinePayment _onlinePayment;
+        public AccountController(IClientService ClientService)
         {
+            _ClientService = ClientService;
         }
-
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(IOnlinePayment onlinePayment)
+        {
+            _onlinePayment = onlinePayment;
+        }
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
         }
-
+        
         public ApplicationSignInManager SignInManager
         {
             get
@@ -141,7 +155,19 @@ namespace HamedApple.Web.Controllers
         {
             return View();
         }
-
+        [AllowAnonymous]
+        public ActionResult RegisterOnPartial(int id)
+        {
+            var ProductDetailAnswers = _ClientService.GetProductDetailAnswer(id);
+            RegisterAndOrderVM RegisterAndOrder = new RegisterAndOrderVM
+            {
+                ProductId = id,
+                Product = _ClientService.GetProduct(id)
+            };
+            RegisterAndOrder.OrderPrice = int.Parse(ProductDetailAnswers.Where(x => x.ProductDetail.Refrence.Name.Contains("#")).Select(x => x.AnswerValue).FirstOrDefault().ToString());
+            //
+            return View(RegisterAndOrder);
+        }
         //
         // POST: /Account/Register
         [HttpPost]
@@ -172,6 +198,70 @@ namespace HamedApple.Web.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> RegisterOnPartial(RegisterAndOrderVM model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return Json(new { status = false, errors = new List<string> { "لطفا اطلاعات خود را به درستی وارد نمایید." } });
+            }
+
+            var user = new ApplicationUser
+            {
+                UserName = model.MobileNumber,
+                Email = model.Email,
+                FullName = model.FullName,
+                NationCode = model.NationCode,
+                MobileNumber = model.MobileNumber
+            };
+            var result = await UserManager.CreateAsync(user, model.Password);
+            if (result.Succeeded)
+            {
+                await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
+                // Send an email with this link
+                // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                OrderVM order = new OrderVM();
+                order.User = user;
+                order.ProductId = model.ProductId;
+                order.Product = model.Product;
+                order.OrderPrice = model.OrderPrice;
+                order.OrderCode = DateTime.Now.Ticks;
+                //
+
+                return await Pay(order);
+            }
+            AddErrors(result);
+
+            // If we got this far, something failed, redisplay form
+            return Json(new { status = false, errors = result.Errors });
+        }
+        public async Task<ActionResult> Pay(OrderVM entity)
+        {
+            var callBackUrl = Url.Action("Verify", controllerName: "Account", routeValues: null, protocol: Request.Url.Scheme);
+            var Result = await _onlinePayment.RequestAsync(invoice =>
+            {
+                invoice
+                .SetTrackingNumber(entity.OrderCode)
+                .SetAmount(long.Parse(entity.OrderPrice.ToString()))
+                .SetCallbackUrl(callBackUrl)
+                .UseIdPay();
+           });
+
+            //
+
+            if (Result.IsSucceed)
+            {
+                return Result.GatewayTransporter.TransportToGateway();
+            }
+
+            return View("Error", Result);
+        }
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]

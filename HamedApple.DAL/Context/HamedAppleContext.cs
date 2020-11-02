@@ -32,12 +32,6 @@ namespace HamedApple.DAL.Context
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Refrence>()
-                .HasOptional(x => x.Parent)
-                .WithMany(x => x.Children)
-                .HasForeignKey(x => x.ParentId)
-                .WillCascadeOnDelete(false);
-
             modelBuilder.Entity<Product>()
                 .HasRequired(p => p.Type)
                 .WithMany(r => r.Products)

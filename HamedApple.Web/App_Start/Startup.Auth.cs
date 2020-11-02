@@ -7,6 +7,9 @@ using Microsoft.Owin.Security.Google;
 using Owin;
 using HamedApple.Web.Models;
 using HamedApple.DAL.Context;
+using HamedApple.DAL.Models;
+using Parbad;
+using Parbad.Builder;
 
 namespace HamedApple.Web
 {
@@ -64,6 +67,8 @@ namespace HamedApple.Web
             //    ClientId = "",
             //    ClientSecret = ""
             //});
+
+            
         }
     }
 }
